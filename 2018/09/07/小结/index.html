@@ -1,0 +1,2023 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="小结, ChenXi">
+    <meta name="description" content="String， Stringbuffer， StringBuilder 的区别。string是常量 被final修饰不可被继承 创建之后不可更改
+stringBuff  JDK1.0 引入  也被final修饰 字符串变量 线程安全的 大部">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>小结 | ChenXi</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">ChenXi</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">ChenXi</div>
+        <div class="logo-desc">
+            
+            ChenXi的博客
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">小结</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Typora/">
+                                <span class="chip bg-color">Typora</span>
+                            </a>
+                        
+                            <a href="/tags/Markdown/">
+                                <span class="chip bg-color">Markdown</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2018-09-07
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="String，-Stringbuffer，-StringBuilder-的区别。"><a href="#String，-Stringbuffer，-StringBuilder-的区别。" class="headerlink" title="String， Stringbuffer， StringBuilder 的区别。"></a>String， Stringbuffer， StringBuilder 的区别。</h1><p>string是常量 被final修饰不可被继承 创建之后不可更改</p>
+<p>stringBuff  JDK1.0 引入  也被final修饰 字符串变量 线程安全的 大部分的方法都做了同步处理,常用的append方法也用synchronized修饰</p>
+<p>其toString方法会进行对象缓存,减少元素复制开销.</p>
+<p>stringBuilder jdk1.5引入  非线程安全的  字符串变量   继承的类和实现的接口与stringBuff一致,方法也除了没使用synchronized修饰以外基本一致  tostring会返回一个新对象.</p>
+<h1 id="和-equals-的区别是什么？"><a href="#和-equals-的区别是什么？" class="headerlink" title="== 和 equals 的区别是什么？"></a><strong>== 和 equals 的区别是什么？</strong></h1><p>==  两种情况</p>
+<p>基本类型对比时,对比的是值是否相同</p>
+<p>应用类型对比时  对比的是引用的地址值是否相同</p>
+<p>equals 本质上就是 ==，默认情况下是引用比较,  但String 和 Integer 等重写了 equals 方法，把它变成了值比较,</p>
+<p>大部分场景下还是值比较的比较多</p>
+<h1 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h1><h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2><p>HashMap集合是一个哈希表：查询速度非常快<br>jdk1.8之前：数组+单向链表</p>
+<p>jdk1.8之后：数组+双向链表+红黑树(链表的长度超过8)：主要因为链表的查询效率是非常低的 </p>
+<p>初始容量16  加载因子0.75  扩容时会扩容成两倍</p>
+<p>HashMap集合是一个无序的集合，存储元素和取出元素的顺序有可能不一致<br>hashMap集合是一个线程不安全的集合,可以存储null值，null键）</p>
+<p>Collections的synchronizedMap方法使HashMap变成线程安全的</p>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>假如在jdk1.7版本 在计算index值发生了冲突的情况下 会存放到同一个链表中, 查询效率非常低 因为他需要从头查询到尾 时间复杂度就是o(n),</p>
+<p>所以1.8引入了红黑树, 在数组长度大于等于64且链表长度大于等于8的时候转换为红黑树,从而解决多个key发生index冲突下的查询效率问题</p>
+<h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>没有发生index冲突: 时间复杂度为o(1),也就是查询一次就可以查到了</p>
+<p>如果发生index冲突的情况下采用链表储存,长度还没等于大于8的时候,则时间复杂度是0(n) 从头查询到尾部</p>
+<p>红黑树: 时间复杂度 o(logn)</p>
+<h3 id="为什么负载因子是0-75"><a href="#为什么负载因子是0-75" class="headerlink" title="为什么负载因子是0.75"></a>为什么负载因子是0.75</h3><p>1.</p>
+<p>HashMap的散列构造方式是Hash取余，负载因子决定元素个数达到多少时候扩容。</p>
+<p>JDK的官方文档中，有这样一段描述描述：</p>
+<p>默认的负载因子(0.75)在时间和空间成本之间提供了很好的权衡</p>
+<p>假如我们设的比较大，元素比较多，空位比较少的时候才扩容，那么发生哈希冲突的概率就增加了，查找的时间成本就增加了。</p>
+<p>我们设的比较小的话，元素比较少，空位比较多的时候就扩容了，发生哈希碰撞的概率就降低了，查找时间成本降低，但是就需要更多的空间去存储元素，空间成本就增加了。</p>
+<p>2.</p>
+<p>临界值 = 总长度 * 扩展因子</p>
+<p>HashMap的扩容机制，他会保证数组的长度永远都是2的幂。</p>
+<p>那么，为了保证<code>负载因子（loadFactor） * 容量（capacity）</code>的结果是一个整数，这个值是0.75(3/4)比较合理，因为这个数和任何2的幂乘积结果都是整数。</p>
+<h3 id="为什么数组长度一定是2的指数"><a href="#为什么数组长度一定是2的指数" class="headerlink" title="为什么数组长度一定是2的指数"></a>为什么数组长度一定是2的指数</h3><p>hash数组长度为什么需要是2的指数</p>
+<p>为了能让 HashMap 存取高效，尽量较少碰撞，也就是要尽量把数据分配均匀</p>
+<p>这个算法其实就是hash值对length长度进行取模运算,计算出来的值就是元素在数组的下表</p>
+<p>这个运算公式在length长度=2的次方的时候</p>
+<p>hash % length = hash &amp; length - 1</p>
+<p>所以length是2的次方的时候 则可以采用二进制位操作 &amp; 相对于 % 能够提高运算效率</p>
+<h3 id="红黑树的作用"><a href="#红黑树的作用" class="headerlink" title="红黑树的作用"></a>红黑树的作用</h3><p>发生 hash 冲突，元素会存入链表，链表过长转为红黑树，将时间复杂度由<code>O(n)</code>降为<code>O(logn)</code></p>
+<h3 id="链表插入方式"><a href="#链表插入方式" class="headerlink" title="链表插入方式"></a>链表插入方式</h3><ol>
+<li><p>：链表的插入方式从头插法改成了尾插法</p>
+<p>简单说就是插入时，如果数组位置上已经有元素，1.7 将新元素放到数组中，原始节点作为新节点的后继节点，1.8 遍历链表，将元素放置到链表的最后。</p>
+<p><code>原因</code>：因为 1.7 头插法扩容时，头插法会使链表发生反转，多线程环境下会产生环。</p>
+</li>
+</ol>
+<p>![image-20211231163504787](/Users/beichen/Library/Application Support/typora-user-images/image-20211231163504787.png)</p>
+<h2 id="linkHashMap"><a href="#linkHashMap" class="headerlink" title="linkHashMap"></a>linkHashMap</h2><p>有序的hashMap集合,底层采用双向链表形式,  将hashMap中的entry采用双向链表形式连接起来 ,他就是一个有序的</p>
+<p>工作中不用这个</p>
+<h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><p>Hashtable是遗留类,继承Dictionary类,映射的常用功能与hashMap类似,并且是线程安全的.同一时间只有一个线程能写hashTable,并发性不如ConcurrentHashMap,ConcurrentHashMap采用了分段锁的方式大大缩小了锁的粒度.所以目前环境中不需要线程安全可以使用HashMap,需要线程安全使用ConcurrentHashMap</p>
+<ul>
+<li>HashMap和Hashtable的区别<ul>
+<li> Hashmap可以存储Key为null的值，线程不安全，但是效率高</li>
+<li> Hashtable不可以存储Key为null的值，线程安全，但是效率低</li>
+</ul>
+</li>
+</ul>
+<p>默认长度是11  扩容之后的长度是两倍+1</p>
+<p>hashMap只允许一条key为null hashtable允许多条</p>
+<p>Hashtable的put方法中有这synchronize修饰，明显是线程安全的</p>
+<p>但是hashmap的put没有 所以他是不安全的</p>
+<p>由于线程安全，所以 HashTable 的效率比不上 HashMap；</p>
+<h3 id="HashMap-是线程安全的吗？多线程下会有什么问题？"><a href="#HashMap-是线程安全的吗？多线程下会有什么问题？" class="headerlink" title="HashMap 是线程安全的吗？多线程下会有什么问题？"></a>HashMap 是线程安全的吗？多线程下会有什么问题？</h3><p>HashMap不是线程安全的，可能会发生这些问题：</p>
+<p>多线程下扩容死循环。JDK1.7 中的 HashMap 使用头插法插入元素，在多线程的环境下，扩容的时候有可能导致环形链表的出现，形成死循环。因此，JDK1.8 使用尾插法插入元素，在扩容时会保持链表元素原本的顺序，不会出现环形链表的问题。</p>
+<p>多线程的 put 可能导致元素的丢失。多线程同时执行 put 操作，如果计算出来的索引位置是相同的，那会造成前一个 key 被后一个 key 覆盖，从而导致元素的丢失。此问题在 JDK 1.7 和 JDK 1.8 中都存在。</p>
+<p>put 和 get 并发时，可能导致 get 为 null。线程 1 执行 put 时，因为元素个数超出 threshold 而导致 rehash，线程 2 此时执行 get，有可能导致这个问题。这个问题在 JDK 1.7 和 JDK 1.8 中都存在。</p>
+<h3 id="HashMap和Hashtable的区别"><a href="#HashMap和Hashtable的区别" class="headerlink" title="HashMap和Hashtable的区别"></a><strong>HashMap和Hashtable的区别</strong></h3><p>HashMap和Hashtable都实现了Map接口，并且都是key-value的数据结构。它们的不同点主要在三个方面：</p>
+<p>第一，Hashtable是Java1.1的一个类，它基于陈旧的Dictionary类。而HashMap是Java1.2引进的Map接口的一个实现。</p>
+<p>第二，Hashtable是线程安全的，也就是说是线程同步的，而HashMap是线程不安全的。也就是说在单线程环境下应该用HashMap，这样效率更高。</p>
+<p>第三，HashMap允许将null值作为key或value，但Hashtable不允许（会抛出NullPointerException）。</p>
+<h2 id="ConcurrentHashMap"><a href="#ConcurrentHashMap" class="headerlink" title="ConcurrentHashMap"></a>ConcurrentHashMap</h2><p>定义:</p>
+<p>jdk1.7  segment数组  每个segment数组带一把锁,每把锁只锁数据中的一段数据,使用了分锁    这样就能大大减少锁的竞争 每个元素是hashEntry  key-value的结构 而且对hashEnrty中的value和next字段都是有volatile修饰的,保证了多线程环境下的可见性</p>
+<p>在ConcurrentHashMap中他，而是使用Segment同步方法，而且Segment又继承了ReentrantLock，所以实现了分布式锁，保证线程安全的同时还提交了效率；</p>
+<p>jdk1.8 取消了segment数组的设计,取而代之直接使用node数组 + 链表 + 红黑树来储存数据,</p>
+<p>底层引入 红黑树,node长度大于等于8的时候转化成红黑树增长查询效率</p>
+<h3 id="node结构"><a href="#node结构" class="headerlink" title="node结构"></a>node结构</h3><p>node结构里有key,value,还有指向下一个node的next节点,以及hash值字段,next字段还用户解决hash冲突之后生成链表使用, </p>
+<p>负载因子0.75 final 不可修改</p>
+<h3 id="node的hash字段必须-gt-0-为什么"><a href="#node的hash字段必须-gt-0-为什么" class="headerlink" title="node的hash字段必须&gt;=0 为什么?"></a>node的hash字段必须&gt;=0 为什么?</h3><p>在锁的实现上，抛弃了原有的 Segment 分段锁，采用<code>CAS + synchronized</code>实现更加细粒度的锁</p>
+<p>（JVM在1.6对Synchronize的优化很好）</p>
+<p>假设使用可重入锁来获得同步支持，那么每个节点都需要通过继承 AQS 来获得同步支持。但并不是每个节点都需要获得同步支持的，只有链表的头节点（红黑树的根节点）需要同步，这无疑带来了巨大内存浪费。</p>
+<p>也就是说只需要锁住这个链表头节点（红黑树的根节点），就不会影响其他的哈希桶数组元素的读写，大大提高了并发度。</p>
+<p>除了加锁，hashmap和ConcurrentHashMap原理上无太大区别。</p>
+<p>ConcurrentHashmap线程安全在jdk1.7版本是基于<code>分段锁</code>实现，在jdk1.8是基于<code>CAS+synchronized</code>实现。</p>
+<h3 id="如何保证的HashMap线程不安全的问题呢？"><a href="#如何保证的HashMap线程不安全的问题呢？" class="headerlink" title="如何保证的HashMap线程不安全的问题呢？"></a>如何保证的HashMap线程不安全的问题呢？</h3><p>Java 中有 HashTable、Collections.synchronizedMap、以及 ConcurrentHashMap 可以实现线程安全的 Map。</p>
+<p>HashTable 是直接在操作方法上加 synchronized 关键字，锁住整个table数组，粒度比较大；<br>Collections.synchronizedMap 是使用 Collections 集合工具的内部类，通过传入 Map 封装出一个 SynchronizedMap 对象，内部定义了一个对象锁，方法内通过对象锁实现；<br>ConcurrentHashMap 在jdk1.7中使用分段锁，在jdk1.8中使用CAS+synchronized。</p>
+<p>synchronized锁桶的头节点 ,来保证桶的线程操作是安全的 </p>
+<p>假如slot是空的,他依赖cas来往slot头节点写入数据,成功则返回 失败则代表其他线程抢先的竞争到这个slot位置了 </p>
+<p>当前线程只能重新执行写逻辑   用synchronized锁桶的头节点  保证线程安全  桶内串行</p>
+<h3 id="为什么-ConcurrentHashMap-比-HashTable-效率要高？"><a href="#为什么-ConcurrentHashMap-比-HashTable-效率要高？" class="headerlink" title="为什么 ConcurrentHashMap 比 HashTable 效率要高？"></a>为什么 ConcurrentHashMap 比 HashTable 效率要高？</h3><p>A：HashTable 使用一把锁（锁住整个链表结构）处理并发问题，多个线程竞争一把锁，容易阻塞；<br>ConcurrentHashMap 用了分段锁：<br>JDK 1.7 中使用ReentrantLock + Segment + HashEntry，相当于把一个 HashMap 分成多个段，每段分配一把锁，这样支持多线程访问。锁粒度：基于 Segment，包含多个 HashEntry。<br>JDK 1.8 中使用 CAS + synchronized + Node + 红黑树。锁粒度：Node（首结点）（实现 Map.Entry&lt;K,V&gt;）。锁粒度降低了。</p>
+<h3 id="Q：针对-ConcurrentHashMap-锁机制具体分析（JDK-1-7-VS-JDK-1-8）？"><a href="#Q：针对-ConcurrentHashMap-锁机制具体分析（JDK-1-7-VS-JDK-1-8）？" class="headerlink" title="Q：针对 ConcurrentHashMap 锁机制具体分析（JDK 1.7 VS JDK 1.8）？"></a>Q：针对 ConcurrentHashMap 锁机制具体分析（JDK 1.7 VS JDK 1.8）？</h3><p>A：JDK 1.7 中，采用分段锁的机制，实现并发的更新操作，底层采用数组+链表的存储结构，包括两个核心静态内部类 Segment 和 HashEntry。<br>①、Segment 继承 ReentrantLock（重入锁） 用来充当锁的角色，每个 Segment 对象守护每个散列映射表的若干个桶；<br>②、HashEntry 用来封装映射表的键-值对；<br>③、每个桶是由若干个 HashEntry 对象链接起来的链表。<br>JDK 1.8 中，采用Node + CAS + Synchronized来保证并发安全。取消类 Segment，直接用 table 数组存储键值对；当 HashEntry 对象组成的链表长度超过 TREEIFY_THRESHOLD 时，链表转换为红黑树，提升性能。底层变更为数组 + 链表 + 红黑树。</p>
+<h3 id="Q：ConcurrentHashMap-在-JDK-1-8-中，为什么要使用内置锁-synchronized-来代替重入锁-ReentrantLock？"><a href="#Q：ConcurrentHashMap-在-JDK-1-8-中，为什么要使用内置锁-synchronized-来代替重入锁-ReentrantLock？" class="headerlink" title="Q：ConcurrentHashMap 在 JDK 1.8 中，为什么要使用内置锁 synchronized 来代替重入锁 ReentrantLock？"></a>Q：ConcurrentHashMap 在 JDK 1.8 中，为什么要使用内置锁 synchronized 来代替重入锁 ReentrantLock？</h3><p>A：<br>①、JVM 开发团队在1.8中对 synchronized做了大量性能上的优化，而且基于 JVM 的 synchronized 优化空间更大，更加自然。<br>②、在大量的数据操作下，对于 JVM 的内存压力，作为一个类 的 ReentrantLock 会开销更多的内存。</p>
+<h3 id="sizeControl字段"><a href="#sizeControl字段" class="headerlink" title="sizeControl字段"></a>sizeControl字段</h3><h2 id="Arraylist-LinkedList"><a href="#Arraylist-LinkedList" class="headerlink" title="Arraylist LinkedList"></a>Arraylist LinkedList</h2><ul>
+<li>Arraylist底层数据结构为数组，基于索引的数据接口，他可以以O(1)的时间复杂度进行随机访问,</li>
+<li>LinkedList底层数据是双向链表， 每个元素链接这前一个元素和后一个元素,他的查询时间复杂度是O(n),</li>
+<li>相对于ArrayList，LinkedList的插入，添加，删除操作速度更快，因为当元素被添加到集合任意位置的时候，不需要像数组那样重新计算大小或者是更新索引</li>
+<li>LinkedList比ArrayList更占内存，因为LinkedList为每一个节点存储了两个引用，一个指向前一个元素，一个指向下一个元素。</li>
+</ul>
+<p>同时两者都是线程不安全的</p>
+<p>Arraylist满了会进行扩容,会定义一个新的数组长度为原先的1.5倍,再把旧数据原封不动复制到新数组中,最后再把数组的地址引向新数组</p>
+<h3 id="ArrayList和Vector的区别（是否有序、是否重复、数据结构、底层实现）"><a href="#ArrayList和Vector的区别（是否有序、是否重复、数据结构、底层实现）" class="headerlink" title="ArrayList和Vector的区别（是否有序、是否重复、数据结构、底层实现）"></a>ArrayList和Vector的区别（是否有序、是否重复、数据结构、底层实现）</h3><p>ArrayList和Vector都实现了List接口，他们都是有序集合，并且存放的元素是允许重复的。它们的底层都是通过数组来实现的，因此列表这种数据结构检索数据速度快，但增删改速度慢。</p>
+<p>而ArrayList和Vector的区别主要在两个方面：</p>
+<p>第一，线程安全。Vector是线程安全的，而ArrayList是线程不安全的。因此在如果集合数据只有单线程访问，那么使用ArrayList可以提高效率。而如果有多线程访问你的集合数据，那么就必须要用Vector，因为要保证数据安全。</p>
+<p>第二，数据增长。ArrayList和Vector都有一个初始的容量大小，当存储进它们里面的元素超过了容量时，就需要增加它们的存储容量。ArrayList每次增长原来的0.5倍，而Vector增长原来的一倍。ArrayList和Vector都可以设置初始空间的大小，Vector还可以设置增长的空间大小，而ArrayList没有提供设置增长空间的方法。</p>
+<p>1.7的时候是初始化就创建一个容量为10的数组，1.8后是初始化先创建一个空数组，第一次add时才扩容为10</p>
+<h3 id="list和map区别"><a href="#list和map区别" class="headerlink" title="list和map区别"></a>list和map区别</h3><p>数据结构的区别  list一般的存的都是单列  map 是key value 的形式 </p>
+<p>数据储存方面 list是有序的 map无序的</p>
+<h1 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h1><h2 id="JDK动态代理"><a href="#JDK动态代理" class="headerlink" title="JDK动态代理"></a>JDK动态代理</h2><p>定义:</p>
+<ol>
+<li>实现 InvocationHandler 接口创建一个自己的调用处理器</li>
+<li>给Proxy类指定calssLoder和interface来创建动态代理类</li>
+<li>通过反射拿到动态代理类的构造函数</li>
+<li>把调用处理器作为参数传入构造函数创建动态代理类的实例</li>
+</ol>
+<h2 id="cglib动态代理"><a href="#cglib动态代理" class="headerlink" title="cglib动态代理"></a>cglib动态代理</h2><p>定义: </p>
+<p>cglib动态代理底层是使用ASM在内存中修改其字节码并生成代理类的子类,实现增强,不需要目标类实现接口.比较简单易用,比较他的运行速比JDK的Proxy动态代理要高不少</p>
+<p>两者区别</p>
+<ol>
+<li><p>JDK的动态代理必须基于接口，CGLIB没有这个要求</p>
+</li>
+<li><p>cglib如果代理类被final修饰 那么则会失败</p>
+</li>
+</ol>
+<h1 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h1><h2 id="并发编程的3个基本概念"><a href="#并发编程的3个基本概念" class="headerlink" title="并发编程的3个基本概念"></a>并发编程的3个基本概念</h2><p>原子性: 即一个操作或者多个操作 要么全部执行成功，要么就都不执行</p>
+<p>可见性: 指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值。</p>
+<p>有序性: 即程序执行的顺序按照代码的先后顺序执行</p>
+<h2 id="锁的互斥和可见性"><a href="#锁的互斥和可见性" class="headerlink" title="锁的互斥和可见性"></a>锁的互斥和可见性</h2><p>互斥性:  同一时间只有一个线程能获取到锁,只有获取到锁的线程能够使用共享数据</p>
+<p>可见性: 指一个线程修改了共享变量的值,新的值对其他线程是立即可见的</p>
+<p>![image-20211230000310217](/Users/beichen/Library/Application Support/typora-user-images/image-20211230000310217.png)</p>
+<p>每个线程都有自己私有的本地内存,保存着主内存的变量副本拷贝,线程对变量的任何操作都只能在本地内存中进行,并不能直接干预主内存中的变量.</p>
+<p>如果线程A改变了本地内存中的变量值,但是还未同步到主内存中,线程B缓存了主内存中的旧值,就会引发值的不一致系列问题.</p>
+<p>解决这种多线程中不可见性问题,加锁是比较粗暴的方式,如synchronized或者lock 但是这些方式太重量级了,比较合理的方式就是用轻量级的volatile</p>
+<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><h3 id="1-可见性-但不保证原子性"><a href="#1-可见性-但不保证原子性" class="headerlink" title="1.可见性 但不保证原子性"></a>1.可见性 但不保证原子性</h3><p>当写一个volatile修饰的变量时,JMM会把该线程本地内存中的变量强制刷新到主内存中去</p>
+<h3 id="2-禁止指令重排"><a href="#2-禁止指令重排" class="headerlink" title="2.禁止指令重排"></a>2.禁止指令重排</h3><p>执行到volatile变量时，其前面的所有语句都执行完，后面所有语句都未执行。且前面语句的结果对volatile变量及其后面语句可见</p>
+<h2 id="synchronized-和-volatile-的区别是什么？"><a href="#synchronized-和-volatile-的区别是什么？" class="headerlink" title="synchronized 和 volatile 的区别是什么？"></a>synchronized 和 volatile 的区别是什么？</h2><p>volatile可以算是一个轻量级的synchronized ,他可以在多线程并发的情况下保证变量的可见性.</p>
+<p>可见性</p>
+<p>就是在一个线程的工作内存中修改了该变量的值，该变量的值能立即回显到主内存中，从而保证所有的线程看到这个变量的值是最新的。</p>
+<p>所以在处理同步问题上它大显作用，而且它的开销比synchronized小、使用成本更低。volatile用于修饰变量</p>
+<p>synchronized 叫做同步锁，是Lock的一个简化版本，由于是简化版本，那么性能肯定是不如Lock的，不过它操作起来方便，只需要用它修饰一个方法或者一段代码块，那么这段代码就是同步的了，所有线程对这块区域的访问必须先持有锁才能进入，否则，则拦截在外面，等待正在持有锁的线程处理完毕再获取锁进入，正因为它基于这种阻塞的策略，所以它的性能不太好，但是由于操作上的优势，只需要简单的声明一下即可，而且被它声明的代码块也是具有操作的原子性。</p>
+<p>因为synchronized 保证了在同一时刻，只能有一个线程执行同步代码块，所以执行同步代码块的时候相当于是单线程操作了，那么线程的可见性、原子性、有序性（线程之间的执行顺序）它都能保证了。</p>
+<p>volatile本质是在告诉jvm当前变量在工作内存中的值是不确定的，需要从主内存中读取； synchronized则是锁定当前变量，只有当前线程可以访问该变量，其他线程被阻塞住。<br>volatile仅能使用在变量级别；synchronized则可以使用在变量、方法、和类级别的。<br>volatile仅能实现变量的修改可见性，不能保证原子性；而synchronized则可以保证变量的修改可见性和原子性。<br>volatile不会造成线程的阻塞；synchronized可能会造成线程的阻塞。</p>
+<p>总结<br>1.volatile 仅能使用在变量级别，synchronized 则可以使用在变量、方法、类级别、代码块上。<br>2.volatile 仅仅能实现变量修改可见性，并不能保证原子性，volatile 表示变量在 CPU 的寄存器中是不确定的，必须从主存中读取，synchronized 可以实现变量的修改可见性和原子性。<br>3.volatile 不会造成线程阻塞，synchronized 可能会造成线程阻塞。<br>4.volatile 标记的变量不会被编译器优化，synchronized 标记的变量可以被编译器优化。<br>5.volatile 修饰的变量，jvm 每次都从主内存中读取，而不会从寄存器（工作内存）中读取。synchronized 表示只有一个线程可以获取作用 对象 的锁，执行代码，阻塞其他线程。<br>volatie 仅能实现变量的可见性，无法保证变量操作的原子性。而synchronized可以实现变量的可见性与原子性。</p>
+<h2 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h2><p>lock比synchronized更加灵活,功能更多,可以知道线程是否有获得锁</p>
+<p>tryLock可以尝试获取锁,返回true或者false,是立即执行并返回的 不会拿不到锁的时候阻塞</p>
+<p>一遍来讲在try catch中运行  finally中操作释放锁,保证抛异常的情况下也能一定释放锁,防止死锁的发生</p>
+<h3 id="ReenTrantLock独有的能力："><a href="#ReenTrantLock独有的能力：" class="headerlink" title="ReenTrantLock独有的能力："></a><strong>ReenTrantLock独有的能力：</strong></h3><ol>
+<li><p>ReenTrantLock可以指定是公平锁还是非公平锁。而synchronized只能是非公平锁。所谓的公平锁就是先等待的线程先获得锁。</p>
+</li>
+<li><p>ReenTrantLock提供了一个Condition（条件）类，用来实现分组唤醒需要唤醒的线程们，而不是像synchronized要么随机唤醒一个线程要么唤醒全部线程。</p>
+</li>
+<li><p>ReenTrantLock提供了一种能够中断等待锁的线程的机制，通过lock.lockInterruptibly()来实现这个机制。</p>
+</li>
+</ol>
+<h2 id="Condition"><a href="#Condition" class="headerlink" title="Condition"></a>Condition</h2><p>监视器</p>
+<p>synchronized只有一个Condition,唤醒只能唤醒单个或者全部唤醒,不够灵活</p>
+<p>Lock可以注册多个监视器,来实现有规律顺序的调度</p>
+<p>如 设置一个int =1</p>
+<p>三个线程   </p>
+<p>线程A int =1的时候运行  不为1的的时候等待 运行完之后int =2</p>
+<p>线程B int =2的时候运行  不为2的的时候等待 运行完之后int =3</p>
+<p>线程C int =3的时候运行  不为3的的时候等待 运行完之后int =1</p>
+<p>来实现ABC的按顺序调用</p>
+<h2 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h2><p>![image-20211231153257484](/Users/beichen/Library/Application Support/typora-user-images/image-20211231153257484.png)</p>
+<p>![image-20211230001428775](/Users/beichen/Library/Application Support/typora-user-images/image-20211230001428775.png)</p>
+<p>state 表示线程状态 返回的是当前持有锁的线程数量</p>
+<p>![image-20211230001435261](/Users/beichen/Library/Application Support/typora-user-images/image-20211230001435261.png)</p>
+<p>![image-20211230001445042](/Users/beichen/Library/Application Support/typora-user-images/image-20211230001445042.png)</p>
+<p>tryAcquire方法是否获取到锁,该方法只有一行实现直接抛出异常,意图就是说你要调用就得继承这个方法然后重写,自由编写业务逻辑</p>
+<p>或者调用Acquire方法  修饰public  和final  不允许实现和重写</p>
+<p>![image-20211231154113680](/Users/beichen/Library/Application Support/typora-user-images/image-20211231154113680.png)</p>
+<p>该方法就是将当前线程封装成一个node  加入等待队列  返回值为当前的节点</p>
+<h2 id="ReenTrantLock"><a href="#ReenTrantLock" class="headerlink" title="ReenTrantLock"></a>ReenTrantLock</h2><p>定义:</p>
+<ol>
+<li>ReenTrantLock是基于AQS,在并发编程中可以实现公平锁和非公平锁对共享资源进行同步.</li>
+<li>他和synchronized一样 具备可重入锁的功能</li>
+<li>他比synchronized功能更加灵活,有更丰富的功能</li>
+</ol>
+<p>源码:</p>
+<p>![image-20211231154902405](/Users/beichen/Library/Application Support/typora-user-images/image-20211231154902405.png)</p>
+<p>![image-20211231154930377](/Users/beichen/Library/Application Support/typora-user-images/image-20211231154930377.png)</p>
+<h3 id="sync"><a href="#sync" class="headerlink" title="sync"></a>sync</h3><p>sync中的方法</p>
+<p>1.lock</p>
+<p>![image-20211231161141519](/Users/beichen/Library/Application Support/typora-user-images/image-20211231161141519.png)</p>
+<p>空实现 需要子类继承并重写</p>
+<p>内部有final的变量 sync  继承与aqs</p>
+<p>sync本身也被abstract 修饰</p>
+<ol start="2">
+<li>nonfairTryAcquire 非公平的获取锁</li>
+</ol>
+<p>![image-20211231160630167](/Users/beichen/Library/Application Support/typora-user-images/image-20211231160630167.png)</p>
+<p>![image-20211231155156618](/Users/beichen/Library/Application Support/typora-user-images/image-20211231155156618.png)</p>
+<p>获取state字段来判断当前锁是否空闲</p>
+<p>如果空闲则进行cas来原子的更改state</p>
+<p>如果更改成功则说明获取到了锁将当前线程设置为独占线程</p>
+<p>state不为0的时候 判断该独占该锁的线程 如果不是则获取锁失败   如果是自己自会累加state来记录重入的次数,因为释放的时候也需要释放对应的次数,是不是自己. 这里就是可重入锁的逻辑实现. 简单来说就是一个线程可以不用释放锁重复获取一个锁N次,不过释放的时候也需要对应的释放N次该锁</p>
+<p>2.</p>
+<p>![image-20211231161419993](/Users/beichen/Library/Application Support/typora-user-images/image-20211231161419993.png)</p>
+<p>tryRelease (是否锁被成功释放 )</p>
+<p>3.</p>
+<p>![image-20211231161545350](/Users/beichen/Library/Application Support/typora-user-images/image-20211231161545350.png)</p>
+<p>判断当前线程是否是获取了锁的独占线程</p>
+<p>4.</p>
+<p>![image-20211231161558851](/Users/beichen/Library/Application Support/typora-user-images/image-20211231161558851.png)</p>
+<p>5.</p>
+<p>![image-20211231161612066](/Users/beichen/Library/Application Support/typora-user-images/image-20211231161612066.png)</p>
+<p>获取当前占用锁的对象  </p>
+<p>6.</p>
+<p>![image-20211231161644175](/Users/beichen/Library/Application Support/typora-user-images/image-20211231161644175.png)</p>
+<p>获取state的数值</p>
+<p>7.![image-20211231161709208](/Users/beichen/Library/Application Support/typora-user-images/image-20211231161709208.png)</p>
+<p>sync是一个抽象类 无法被实例化 具体发挥作用还得看他的子类</p>
+<p>判断锁是否空闲</p>
+<p>子类:</p>
+<p>![image-20211231160630167](/Users/beichen/Library/Application Support/typora-user-images/image-20211231160630167.png)</p>
+<h3 id="NonFairSync和FairSync"><a href="#NonFairSync和FairSync" class="headerlink" title="NonFairSync和FairSync"></a>NonFairSync和FairSync</h3><p>公平锁:</p>
+<p>定义:</p>
+<p>先进先拿到锁</p>
+<p>缺点:</p>
+<p>比非公平锁来讲性能低,</p>
+<p>如果一个线程在排队中 不断有新的线程进来排队 该线程可能会一直处于阻塞状态</p>
+<p>非公平锁:随机拿到锁</p>
+<p>定义:</p>
+<p>随机拿到锁</p>
+<p>优点:</p>
+<p>性能高</p>
+<h4 id="NonFairSync重写的方法"><a href="#NonFairSync重写的方法" class="headerlink" title="NonFairSync重写的方法"></a>NonFairSync重写的方法</h4><p>![image-20211231162116562](/Users/beichen/Library/Application Support/typora-user-images/image-20211231162116562.png)</p>
+<p> lock 上来就直接cas获取锁</p>
+<h4 id="FairSync"><a href="#FairSync" class="headerlink" title="FairSync"></a>FairSync</h4><p>![image-20211231162638976](/Users/beichen/Library/Application Support/typora-user-images/image-20211231162638976.png)</p>
+<h2 id="ReenTrantLock独有的能力：-1"><a href="#ReenTrantLock独有的能力：-1" class="headerlink" title="ReenTrantLock独有的能力："></a><strong>ReenTrantLock独有的能力：</strong></h2><p>\1.   ReenTrantLock可以指定是公平锁还是非公平锁。而synchronized只能是非公平锁。所谓的公平锁就是先等待的线程先获得锁。</p>
+<p>\2.   ReenTrantLock提供了一个Condition（条件）类，用来实现分组唤醒需要唤醒的线程们，而不是像synchronized要么随机唤醒一个线程要么唤醒全部线程。</p>
+<p>\3.   ReenTrantLock提供了一种能够中断等待锁的线程的机制，通过lock.lockInterruptibly()来实现这个机制。</p>
+<p><strong>ReenTrantLock实现的原理：</strong></p>
+<p>在网上看到相关的源码分析，本来这块应该是本文的核心，但是感觉比较复杂就不一一详解了，简单来说，ReenTrantLock的实现是一种自旋锁，通过循环调用CAS操作来实现加锁。它的性能比较好也是因为避免了使线程进入内核态的阻塞状态。<strong>想尽办法避免线程进入内核的阻塞状态是我们去分析和理解锁设计的关键钥匙。</strong></p>
+<p><strong>什么情况下使用ReenTrantLock：</strong></p>
+<p>答案是，如果你需要实现ReenTrantLock的三个独有功能时。</p>
+<h2 id="synchronized和lock不同"><a href="#synchronized和lock不同" class="headerlink" title="synchronized和lock不同"></a>synchronized和lock不同</h2><ol>
+<li>synchronized是关键字lock是类</li>
+<li>synchronized是代码执行完之后,系统自动释放线程的锁,lock必须要用户手动释放锁,如果没有释放可能就会死锁</li>
+</ol>
+<p>Synchronized是依赖于JVM实现的，而ReenTrantLock是JDK实现的</p>
+<h2 id="CAS机制"><a href="#CAS机制" class="headerlink" title="CAS机制"></a>CAS机制</h2><p>Compare And Swap 比较并替换</p>
+<p>CAS机制当中使用了3个基本操作数：内存地址V，旧的预期值A，要修改的新值B。</p>
+<p>更新一个变量的时候，只有当变量的预期值A和内存地址V当中的实际值相同时，才会将内存地址V对应的值修改为B。</p>
+<p>CAS是英文单词Compare And Swap的缩写，翻译过来就是比较并替换。</p>
+<p>CAS机制当中使用了3个基本操作数：内存地址V，旧的预期值A，要修改的新值B。</p>
+<p>更新一个变量的时候，只有当变量的预期值A和内存地址V当中的实际值相同时，才会将内存地址V对应的值修改为B。</p>
+<p>这样说或许有些抽象，我们来看一个例子：</p>
+<p>1.在内存地址V当中，存储着值为10的变量。</p>
+<p>2.此时线程1想要把变量的值增加1。对线程1来说，旧的预期值A=10，要修改的新值B=11。</p>
+<p>3.在线程1要提交更新之前，另一个线程2抢先一步，把内存地址V中的变量值率先更新成了11。</p>
+<p>4.线程1开始提交更新，首先进行A和地址V的实际值比较（Compare），发现A不等于V的实际值，提交失败。</p>
+<p>5.线程1重新获取内存地址V的当前值，并重新计算想要修改的新值。此时对线程1来说，A=11，B=12。这个重新尝试的过程被称为自旋。</p>
+<p>6.这一次比较幸运，没有其他线程改变地址V的值。线程1进行Compare，发现A和地址V的实际值是相等的。</p>
+<p>7.线程1进行SWAP，把地址V的值替换为B，也就是12。</p>
+<p>从思想上来说，Synchronized属于悲观锁，悲观地认为程序中的并发情况严重，所以严防死守。CAS属于乐观锁，乐观地认为程序中的并发情况不那么严重，所以让线程不断去尝试更新。</p>
+<p>优点: 乐观锁避免了悲观锁独占对象的现象，同时也提高了并发性能，乐观锁是对悲观锁的改进，虽然它也有缺点，但它确实已经成为提高并发性能的主要手段，而且jdk中的并发包也大量使用基于CAS的乐观锁</p>
+<h2 id="Atomicinteger"><a href="#Atomicinteger" class="headerlink" title="Atomicinteger"></a>Atomicinteger</h2><p>unsafe类</p>
+<h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><h2 id="创建线程的方式"><a href="#创建线程的方式" class="headerlink" title="创建线程的方式"></a>创建线程的方式</h2><ol>
+<li><p>继承Thread类</p>
+</li>
+<li><p>实现Runnable接口</p>
+</li>
+<li><p><strong>用Callable和Future创建线程</strong></p>
+</li>
+</ol>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>new ThreadPoolExecutor</p>
+<ol>
+<li>![image-20211230145754437](/Users/beichen/Library/Application Support/typora-user-images/image-20211230145754437.png)</li>
+</ol>
+<h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a><strong>线程的生命周期</strong></h2><p>线程通常都有五种状态，创建、就绪、运行、阻塞和死亡。</p>
+<p>创建状态。在生成线程对象，并没有调用该对象的start方法，这是线程处于创建状态。<br>就绪状态。当调用了线程对象的start方法之后，该线程就进入了就绪状态，但是此时线程调度程序还没有把该线程设置为当前线程，此时处于就绪状态。在线程运行之后，从等待或者睡眠中回来之后，也会处于就绪状态。<br>运行状态。线程调度程序将处于就绪状态的线程设置为当前线程，此时线程就进入了运行状态，开始运行run函数当中的代码。<br>阻塞状态。线程正在运行的时候，被暂停，通常是为了等待某个时间的发生(比如说某项资源就绪)之后再继续运行。sleep,suspend，wait等方法都可以导致线程阻塞。<br>死亡状态。如果一个线程的run方法执行结束或者调用stop方法后，该线程就会死亡。对于已经死亡的线程，无法再使用start方法令其进入就绪 　　</p>
+<h2 id="sleep-和-wait-的区别。"><a href="#sleep-和-wait-的区别。" class="headerlink" title="sleep 和 wait 的区别。"></a><strong>sleep 和 wait 的区别。</strong></h2><p>Sleep是休眠线程，wait是等待，sleep是thread的静态方法，wait则是object的方法。<br>Sleep依旧持有锁，并在指定时间自动唤醒。wait则释放锁</p>
+<p>sleep可以在同步代码快外调用</p>
+<p>wait只能同步代码块里</p>
+<h2 id="Lock-与-Synchronized-的区别"><a href="#Lock-与-Synchronized-的区别" class="headerlink" title="Lock 与 Synchronized 的区别"></a><strong>Lock 与 Synchronized 的区别</strong></h2><h2 id="notify-和-notifyAll-有什么区别？"><a href="#notify-和-notifyAll-有什么区别？" class="headerlink" title="notify()和 notifyAll()有什么区别？"></a>notify()和 notifyAll()有什么区别？</h2><h2 id="线程的-run-和-start-有什么区别？"><a href="#线程的-run-和-start-有什么区别？" class="headerlink" title="线程的 run()和 start()有什么区别？"></a>线程的 run()和 start()有什么区别？</h2><p>run  等于说在当前线程中执行了一个普通方法而已,还是会按照顺序来执行代码</p>
+<p>start 则是真真的开启一个线程,拿到时间片,该运行的时候则会自动调用run方法</p>
+<h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h2 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h2><p>![image-20211231170509526](/Users/beichen/Library/Application Support/typora-user-images/image-20211231170509526.png)</p>
+<p>![image-20211231170718404](/Users/beichen/Library/Application Support/typora-user-images/image-20211231170718404.png)![image-20211231170723464](/Users/beichen/Library/Application Support/typora-user-images/image-20211231170723464.png)</p>
+<p>![](/Users/beichen/Library/Application Support/typora-user-images/image-20211231170854220.png)</p>
+<p>![image-20211231171840335](/Users/beichen/Library/Application Support/typora-user-images/image-20211231171840335.png)</p>
+<ol>
+<li></li>
+</ol>
+<p>![image-20211231171926109](/Users/beichen/Library/Application Support/typora-user-images/image-20211231171926109.png)</p>
+<p> 首先客户端和服务端都是close的状态</p>
+<ol start="2">
+<li> ![image-20211231172146632](/Users/beichen/Library/Application Support/typora-user-images/image-20211231172146632.png)</li>
+</ol>
+<p>服务端监听某个端口 变为listent状态</p>
+<p>客户端主动 发起请求    发送syn(瘆)包 询问能否进行链接  客户端状态变为syn(瘆) sent</p>
+<p>3.</p>
+<p>![image-20211231172323199](/Users/beichen/Library/Application Support/typora-user-images/image-20211231172323199.png)</p>
+<p> 服务端接收消息之后发送syn(瘆)和ack(ai ke )到客户端,服务端状态为syn-revd</p>
+<ol start="4">
+<li>![image-20211231172503591](/Users/beichen/Library/Application Support/typora-user-images/image-20211231172503591.png)</li>
+</ol>
+<p>客户端之后在发送ack包(ai ke)到服务 户端状态更新为Established(e si tai bu lei  shit)</p>
+<p>最后 服务端收到了ack之后 也变为Established状态</p>
+<h2 id="为什么是三次握手"><a href="#为什么是三次握手" class="headerlink" title="为什么是三次握手"></a>为什么是三次握手</h2><p>比如</p>
+<p>客户端发送一个syn(shen)包,因为网络原因滞留,服务端没有收到</p>
+<p>客户端再次发送一个syn(shen)包与服务端成功链接</p>
+<p>服务端恢复syn 和ack包正常链接</p>
+<p>这个时候延迟的第一个syn包才送到</p>
+<p>服务器端这边就会认为建立了两次链接</p>
+<p>客户端却只有一次 </p>
+<p>三次握手本质来说就是为了解决网络信道不可靠 </p>
+<h2 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h2><p>![image-20211231180944119](/Users/beichen/Library/Application Support/typora-user-images/image-20211231180944119.png)</p>
+<p>第一次挥手: 客户端发送一个fin(fen)包 表示要关闭链接 客户端进入终止连接1 状态</p>
+<p> ![image-20211231175247330](/Users/beichen/Library/Application Support/typora-user-images/image-20211231175247330.png)</p>
+<p>第二次挥手: 服务端收到消息发送ack(ai ke)包给客户端 服务端进入终止等待状态 客户端进入终止连接2     状态 </p>
+<p>![image-20211231175720191](/Users/beichen/Library/Application Support/typora-user-images/image-20211231175720191.png)</p>
+<p>第三次挥手: 服务端发送fin包,更新状态为last_ack状态  最后确认状态</p>
+<p>![image-20211231175754984](/Users/beichen/Library/Application Support/typora-user-images/image-20211231175754984.png)</p>
+<p>客户端恢复ack包,进入超时等待状态  等待一段时间后关闭链接</p>
+<p>服务器端则收到ack包后立即关闭链接 </p>
+<h2 id="为什么四次挥手"><a href="#为什么四次挥手" class="headerlink" title="为什么四次挥手"></a>为什么四次挥手</h2><p>![image-20211231180035747](/Users/beichen/Library/Application Support/typora-user-images/image-20211231180035747.png)</p>
+<p>如果ack包丢失,服务端将一直等待为最后确认状态 </p>
+<p>最后有等待时间,服务端则一段时间没有收到最终确认的ack包会重新发送fin包,客户端响应fin包并发送ack包刷新等待时间.</p>
+<p>为了在不可靠的网络信道中进行可靠的链接断开</p>
+<h1 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h1><p>对spring的理解</p>
+<p>spring是一个轻量级的开源框架,核心容器,简化了企业级应用的后台开发,降低了耦合性.</p>
+<p>平时用的最多的是IOC 和 AOP 特性</p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><p>轻 量、控 制 反 转、面 向 切 面 的 编 程(AOP)、容 器、MVC 框 架、事 务 管 理、异 常 处 理</p>
+<h3 id="ioc"><a href="#ioc" class="headerlink" title="ioc"></a>ioc</h3><p>控制反转，指将对象的控制权转移给Spring框架，由 Spring 来负责控制对象的生命周期（比如创建、销毁）和对象间的依赖关系。</p>
+<h3 id="Bean的生命周期"><a href="#Bean的生命周期" class="headerlink" title="Bean的生命周期"></a>Bean的生命周期</h3><p>Bean容器找到Spring配置文件中Bean的定义；Bean容器利用java 反射机制实例化Bean；</p>
+<p>Bean容器为实例化的Bean设置属性值；<br>如果Bean实现了BeanNameAware接口，则执行setBeanName方法；<br>如果Bean实现了BeanClassLoaderAware接口，则执行setBeanClassLoader方法；<br>如果Bean实现了BeanFactoryAware接口，则执行setBeanFactory方法；<br>如果 ……真的，到这我经常忘记，但前面三个Aware接口肯定能记住；<br>如果Bean实现了ApplicationContextAware接口，则执行setApplicationContext方法；<br>如果加载了BeanPostProcessor相关实现类，则执行postProcessBeforeInitialization方法；<br>如果Bean定义初始化方法（PostConstruct注解、配置init-method、实现了InitializingBean接口），则执行定义的初始化方法；<br>如果加载了BeanPostProcessor相关实现类，则执行postProcessAfterInitialization方法；<br>当要销毁这个Bean时，如果自定义了销毁方法（PreDestroy注解、配置destroy-method、实现了DisposableBean接口），则执行定义的销毁方法。</p>
+<ul>
+<li>\1. 通过构造器创建bean实例</li>
+<li>\2. 为bean的属性设置值和对其他bean的引用</li>
+<li>\3. 把bean实例传递给bean后置处理器的方法</li>
+<li>\4. 调用bean的初始化方法</li>
+<li>\5. 把bean实例传递给bean后置处理器的方法</li>
+<li>\6. 使用bean</li>
+<li>\7. 容器关闭时，调用bean的销毁方法</li>
+</ul>
+<h3 id="DI"><a href="#DI" class="headerlink" title="DI"></a>DI</h3><h3 id="aop"><a href="#aop" class="headerlink" title="aop"></a>aop</h3><p>常用的 场景 权限认证 打印日志 错误处理 自动缓存</p>
+<p>面向切面编程,将代码重复的部分抽取出来,在执行的时候动态代理的方式,在不改变原本源码的基础上进行增强.</p>
+<p>spring根据类是否实现接口来判断使用哪种动态代理方式,没有实现接口使用cglib动态代理,运行时动态生成其子类</p>
+<p>否则使用JDK动态代理, 通过重组字节码实现,</p>
+<h3 id="JDK动态代理-1"><a href="#JDK动态代理-1" class="headerlink" title="JDK动态代理"></a>JDK动态代理</h3><p>需要代理对象实现接口,代理对象的生成是通过JDK的反射,动态的在内存中构建新的代理对象,需要java.lang.reflect.InvocationHandler 接口和 java.lang.reflect.Proxy 类的支持,</p>
+<h3 id="CGLIB动态代理"><a href="#CGLIB动态代理" class="headerlink" title="CGLIB动态代理"></a>CGLIB动态代理</h3><p>不需要目标实现接口,用继承的方式来实现,底层包是通过字节码处理框架ASM转换字节码生成新的类,也被成为子类代理,他是在内存中构建一个子类对象从而实现目标功能的扩展</p>
+<h3 id="Spring-AOP-中有哪些不同的通知类型"><a href="#Spring-AOP-中有哪些不同的通知类型" class="headerlink" title="Spring AOP 中有哪些不同的通知类型"></a>Spring AOP 中有哪些不同的通知类型</h3><p>通知(advice)是你在你的程序中想要应用在其他模块中的横切关注点的实现。Advice主要有以下5种类型：</p>
+<ol>
+<li><strong>前置通知(Before Advice)</strong>: 在连接点之前执行的Advice，不过除非它抛出异常，否则没有能力中断执行流。使用 <code>@Before</code> 注解使用这个Advice。</li>
+<li><strong>返回之后通知(After Retuning Advice)</strong>: 在连接点正常结束之后执行的Advice。例如，如果一个方法没有抛出异常正常返回。通过 <code>@AfterReturning</code> 关注使用它。</li>
+<li><strong>抛出（异常）后执行通知(After Throwing Advice)</strong>: 如果一个方法通过抛出异常来退出的话，这个Advice就会被执行。通用 <code>@AfterThrowing</code> 注解来使用。</li>
+<li><strong>后置通知(After Advice)</strong>: 无论连接点是通过什么方式退出的(正常返回或者抛出异常)都会执行在结束后执行这些Advice。通过 <code>@After</code> 注解使用。</li>
+<li><strong>围绕通知(Around Advice)</strong>: 围绕连接点执行的Advice，就你一个方法调用。这是最强大的Advice。通过 <code>@Around</code> 注解使用</li>
+</ol>
+<h3 id="BeanFactory和ApplicationContext有什么区别？"><a href="#BeanFactory和ApplicationContext有什么区别？" class="headerlink" title="BeanFactory和ApplicationContext有什么区别？"></a>BeanFactory和ApplicationContext有什么区别？</h3><p>● ApplicationContext是BeanFactory的子接口</p>
+<p>● BeanFactroy只有在使用到某个Bean时，才会对Bean进行加载实例化（延迟加载）</p>
+<p>● 弊端</p>
+<p>● 如果Bean的某一个属性没有注入，要到第一次使用调用getBean方法才能抛出异常</p>
+<p>● ApplicationContext在启动时，一次性创建出所有的Bean</p>
+<p>● 好处</p>
+<p>● 有利于检查所依赖属性是否注入</p>
+<p>● 弊端</p>
+<p>● 占用内存空间，当应用程序配置Bean多时，启动就慢</p>
+<h2 id="什么是脏读、不可重复读、幻读？"><a href="#什么是脏读、不可重复读、幻读？" class="headerlink" title="什么是脏读、不可重复读、幻读？"></a>什么是脏读、不可重复读、幻读？</h2><p>脏读 ：表示一个事务能够读取另一个事务中还未提交的数据。比如A事务执行过程中，B事务读取了A事务的修改。但是由于某些原因A事务没有完成提交，发生了回滚操作，则B事务所读取的数据是不正确的，这就是脏读。<br>不可重复读 ：表示一个事务读到另一个事务已经提交的updated数据，导致多次查询结果不一致。比如B事务读取了两次数据，在这两次的读取过程中A事务修改了数据，导致B事务的这两次读取出来的数据不一样，这就是不可重复读<br>幻读 ：表示一个事务读到另一个事务已经提交的insert数据，导致多次查询结果不一致。比如B事务读取了两次数据，在这两次的读取过程中A事务添加了数据，导致B事务的这两次读取出来的数据不一样，这就是幻读</p>
+<h2 id="讲讲-Spring-事务的传播属性。"><a href="#讲讲-Spring-事务的传播属性。" class="headerlink" title="讲讲 Spring 事务的传播属性。"></a>讲讲 Spring 事务的传播属性。</h2><p>七种传播属性。<br>事务传播行为<br>所谓事务的传播行为是指，如果在开始当前事务之前，一个事务上下文已经存在，此时有若干选项可以指定一个事务性方法的执行行为。在TransactionDefinition定义中包括了如下几个表示传播行为的常量：<br>①TransactionDefinition.PROPAGATION_REQUIRED：如果当前存在事务，则加入该事务；如果当前没有事务，则创建一个新的事务。<br>②TransactionDefinition.PROPAGATION_REQUIRES_NEW：创建一个新的事务，如果当前存在事务，则把当前事务挂起。<br>③TransactionDefinition.PROPAGATION_SUPPORTS：如果当前存在事务，则加入该事务；如果当前没有事务，则以非事务的方式继续运行。<br>④TransactionDefinition.PROPAGATION_NOT_SUPPORTED：以非事务方式运行，如果当前存在事务，则把当前事务挂起。<br>⑤TransactionDefinition.PROPAGATION_NEVER：以非事务方式运行，如果当前存在事务，则抛出异常。<br>⑥TransactionDefinition.PROPAGATION_MANDATORY：如果当前存在事务，则加入该事务；如果当前没有事务，则抛出异常。<br>⑦TransactionDefinition.PROPAGATION_NESTED：如果当前存在事务，则创建一个事务作为当前事务的嵌套事务来运行；如果当前没有事务，则该取值等价于TransactionDefinition.PROPAGATION_REQUIRED。</p>
+<h1 id="事务的ACID是指什么？"><a href="#事务的ACID是指什么？" class="headerlink" title="事务的ACID是指什么？"></a>事务的ACID是指什么？</h1><p>原子性(Atomic)：事务中各项操作，要么全做要么全不做，任何一项操作的失败都会导致整个事务的失败；<br>一致性(Consistent)：事务结束后系统状态是一致的；<br>隔离性(Isolated)：并发执行的事务彼此无法看到对方的中间状态；<br>持久性(Durable)：事务完成后所做的改动都会被持久化，即使发生灾难性的失败，通过日志和同步备份可以在故障发生后重建数据。</p>
+<h1 id="SpringMVC"><a href="#SpringMVC" class="headerlink" title="SpringMVC"></a>SpringMVC</h1><p>springMvc 执行流程</p>
+<p>![image-20211230000408489](/Users/beichen/Library/Application Support/typora-user-images/image-20211230000408489.png)</p>
+<ol>
+<li><p>用户请求到前端控制器DispatcherServlet</p>
+</li>
+<li><p>前端控制器请求查询handle到处理映射器handleMapping</p>
+</li>
+<li><p>生成处理器执行链并返回</p>
+</li>
+<li><p>请求执行handle到处理适配器HandlerAdapter</p>
+</li>
+<li><p>HandlerAdapter请求handler处理器</p>
+</li>
+<li><p>返回ModelAndView 一直返回到前端控制器</p>
+</li>
+<li><p>请求ModelAndView到ViewResolve视图解析器 获得view 并返回</p>
+</li>
+<li><p>解析返回view</p>
+</li>
+<li><p>渲染view</p>
+</li>
+<li><p>返回给用户</p>
+</li>
+</ol>
+<h1 id="SpringBoot"><a href="#SpringBoot" class="headerlink" title="SpringBoot"></a>SpringBoot</h1><ol>
+<li><p>SpringBoot的启动类上有一个@SpringBootApplication注解 </p>
+</li>
+<li><p>主要有三个@SpringBootConfiguration @EnableAutoConfiguration @ComponentScan</p>
+</li>
+<li><p>@SpringBootConfiguration 其实就是配置类</p>
+</li>
+<li><p>@ComponentScan   组件扫描,SpringBoot启动类的同级路径及子路径</p>
+</li>
+<li><h3 id="EnableAutoConfiguration-核心注解-翻译过来就是开启自动配置"><a href="#EnableAutoConfiguration-核心注解-翻译过来就是开启自动配置" class="headerlink" title="@EnableAutoConfiguration 核心注解  翻译过来就是开启自动配置"></a>@EnableAutoConfiguration 核心注解  翻译过来就是开启自动配置</h3></li>
+<li><p>其中关键功能由@Import提供 其导入的<strong>AutoConfigurationImportSelector</strong> 中的selectImports()方法</p>
+</li>
+<li><p>此方法会找到META-INF/spring.factories文件下所有自动配置类进行加载到spring容器中</p>
+</li>
+</ol>
+<p>总结：SpringBoot启动的时候通过@EnableAutoConfiguration注解找到META-INF/spring.factories文件中的所有自动配置类，并对其加载，这些自动配置类都是以AutoConfiguration结尾来命名的。它实际上就是一个JavaConfig形式的IOC容器配置类，通过以Properties结尾命名的类中取得在全局配置文件中配置的属性，如server.port。<br>*Properties类的含义：封装配置文件的相关属性。<br>*AutoConfiguration类的含义：自动配置类，添加到IOC容器中。</p>
+<h2 id="Spring-Cloud"><a href="#Spring-Cloud" class="headerlink" title="Spring Cloud"></a>Spring Cloud</h2><p>Spring Cloud Eureka：服务注册与发现<br>Spring Cloud Zuul：服务网关<br>Spring Cloud Ribbon：客户端负载均衡<br>Spring Cloud Feign：声明性的Web服务客户端<br>Spring Cloud Hystrix：断路器<br>Spring Cloud Confifig：分布式统一配置管理</p>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h2><p>读未提交</p>
+<p>读已提交</p>
+<p>可重复读</p>
+<p>可串行化</p>
+<h1 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h1><h2 id="sql优化"><a href="#sql优化" class="headerlink" title="sql优化"></a>sql优化</h2><p>根据需求创建结构良好的sql,根据sql在表中建立有效的索引.但是索引太多,也会影响写入和查询的效率</p>
+<p>三范式来进行表结构的设计</p>
+<p>Varchar长度分配真正需要的空间</p>
+<p>使用枚举或者整数代替字符串类型</p>
+<p>单表字段不宜太多,20以内</p>
+<p>避免使用null字段,很难查询优化而且占额外索引空间</p>
+<p>定位慢sql并优化<br>常见的是用自带的慢查询日志或者开源的慢查询系统定位到具体出问题的SQL,然后使用explain,profile等工具逐步调优</p>
+<p>尽量少用或者不用数据库自带的函数</p>
+<p>连续数值条件用between 而不是用in<br>update语句更改的时候 如果只更改12个字段,不要update全部字段</p>
+<p>尽量使用数字型的字段, 只包含数值类型的字段不要设计成字符型</p>
+<p>表与表之间可以设计一个冗余字段来关联, 要比直接使用join会有更好的性能</p>
+<p>使用where子句 的时候不要null ,不会要!= ,&gt; &lt;,判断是否会放弃索引全表扫描</p>
+<p>where子句的时候尽量避免使用or,如果一个有索引一个没有 则会全表扫描</p>
+<h2 id="MySQL数据库中引擎MyISAM和InnoDB的区别"><a href="#MySQL数据库中引擎MyISAM和InnoDB的区别" class="headerlink" title="MySQL数据库中引擎MyISAM和InnoDB的区别"></a>MySQL数据库中引擎MyISAM和InnoDB的区别</h2><p>MyISAM强调的是性能，每次查询具有原子性,其执行数度比InnoDB类型更快，但是不提供事务支持；InnoDB提供事务支持事务。</p>
+<p>MyISAM只支持表级锁；InnoDB支持事务和行级锁</p>
+<p>MyISAM允许没有任何索引和主键的表存在，索引都是保存行的地址。InnoDB如果没有设定主键或者非空唯一索引，就会自动生成一个6字节的主键。</p>
+<p>如果执行大量的SELECT，MyISAM是更好的选择。如果执行大量的INSERT或UPDATE，出于性能方面的考虑，应该使用InnoDB表。</p>
+<p>MyISAM不支持；InnoDB支持</p>
+<h2 id="CHAR和VARCHAR的区别？"><a href="#CHAR和VARCHAR的区别？" class="headerlink" title="CHAR和VARCHAR的区别？"></a>CHAR和VARCHAR的区别？</h2><blockquote>
+<p>CHAR 和 VARCHAR 类型在存储和检索方面有所不同<br>CHAR 列长度固定为创建表时声明的长度，长度值范围是1到255当CHAR值被存储时，它们被用空格填充到特定长度，检索 CHAR 值时需删除尾随空格。</p>
+</blockquote>
+<p>read uncommited ：读到未提交数据<br>read committed：脏读，不可重复读<br>repeatable read：可重复读<br>serializable ：串行事务</p>
+<h2 id="乐观锁和悲观锁是什么，INNODB-的行级锁有哪-2-种，解释其含义。"><a href="#乐观锁和悲观锁是什么，INNODB-的行级锁有哪-2-种，解释其含义。" class="headerlink" title="乐观锁和悲观锁是什么，INNODB 的行级锁有哪 2 种，解释其含义。"></a><strong>乐观锁和悲观锁是什么，INNODB 的行级锁有哪 2 种，解释其含义。</strong></h2><p>乐观锁是设定每次修改都不会冲突，只在提交的时候去检查，悲观锁设定每次修改都会冲突，持有排他锁。<br>行级锁分为共享锁和排他锁两种 共享锁又称读锁 排他锁又称写锁</p>
+<h2 id="优化数据库的方法？"><a href="#优化数据库的方法？" class="headerlink" title="优化数据库的方法？"></a>优化数据库的方法？</h2><blockquote>
+<p>选取最适用的字段属性，尽可能减少定义字段宽度，尽量把字段设置 NOTNULL，例如’省份’、’性别’最好适用枚举类型ENUM<br>使用连接(JOIN)来代替子查询<br>适用联合(UNION)来代替手动创建的临时表<br>事务处理<br>锁定表、优化事务处理<br>适用外键，优化锁定表<br>建立索引<br>优化查询语句</p>
+</blockquote>
+<h2 id="sql优化-1"><a href="#sql优化-1" class="headerlink" title="sql优化"></a>sql优化</h2><ol>
+<li><p><em><strong>尽量把字段设置为NOT NULL</strong></em> 这样数据库查询的时候不用对比null</p>
+</li>
+<li><p><em><strong>使用连接(JOIN)来代替子查询(Sub-Queries)</strong></em></p>
+</li>
+<li><p>表中字段的宽度舍得尽可能小 会有更好的性能</p>
+</li>
+<li><p>不使用子查询</p>
+</li>
+<li><p>避免函数索引</p>
+</li>
+<li><p>用IN来替换OR</p>
+</li>
+<li><p>禁止不必要的ORDER BY排序</p>
+</li>
+</ol>
+<p> 简单描述 MySQL 中索引、主键、唯一索引、联合索引的区别，对数据库的性能有什么影响（从读写两方面）？<br>索引是一种特殊的文件，包含着对数据表里所有记录的引用指针。索引可以极大的提高数据的查询速度，但是会降低插入、删除、更新表的速度，因为在执行这些写操作时，还要操作索引文件。<br>普通索引的唯一任务是加快对数据的访问速度，允许被索引的数据列包含重复的值。<br>如果能确定某个数据列将只包含彼此各不相同的值，在为这个数据列创建索引的时候就应该用关键字 UNIQUE把它定义为一个唯一索引，唯一索引可以保证数据记录的唯一性。<br>主键是一种特殊的唯一索引，在一张表中只能定义一个主键索引，主键用于唯一标识一条记录，使用关键字PRIMARY KEY来创建。<br>联合索引可以覆盖多个数据列，如像INDEX(columnA, columnB)索引。</p>
+<h2 id="什么是锁？"><a href="#什么是锁？" class="headerlink" title="什么是锁？"></a>什么是锁？</h2><p>数据库是一个多用户使用的共享资源，当多个用户并发地存取数据时，在数据库中就会产生多个事务同时存取同一数据的情况。若对并发操作不加控制就可能会读取和存储不正确的数据，破坏数据库的一致性。加锁是实现数据库并发控制的一个非常重要的技术。当事务在对某个数据对象进行操作前，先向系统发出请求，对其加锁。加锁后事务就对该数据对象有了一定的控制，在该事务释放锁之前，其他的事务不能对此数据对象进行更新操作。基本锁类型：锁包括行级锁和表级锁</p>
+<h2 id="索引的底层实现原理和优化？"><a href="#索引的底层实现原理和优化？" class="headerlink" title="索引的底层实现原理和优化？"></a>索引的底层实现原理和优化？</h2><blockquote>
+<p>索引的底层实现原理是B+树，优化是经过优化的 B+树。主要是在所有的叶子结点中增加了指向下一个叶子节点的指针，因此 InnoDB 建议为大部分表使用默认自增的主键作为主索引。</p>
+</blockquote>
+<h2 id="什么情况下不宜建立索引？"><a href="#什么情况下不宜建立索引？" class="headerlink" title="什么情况下不宜建立索引？"></a>什么情况下不宜建立索引？</h2><blockquote>
+<p>对于查询中很少涉及的列或者重复值比较多的列，不宜建立索引。对于一些特殊的数据类型，不宜建立索引，比如文本字段（text）等</p>
+</blockquote>
+<h2 id="为数据表建立索引的原则有哪些？"><a href="#为数据表建立索引的原则有哪些？" class="headerlink" title="为数据表建立索引的原则有哪些？"></a>为数据表建立索引的原则有哪些？</h2><blockquote>
+<p>在最频繁使用的、用以缩小查询范围的字段上建立索引。在频繁使用的、需要排序的字段上建立索引</p>
+</blockquote>
+<h2 id="索引对数据库系统的负面影响是什么？"><a href="#索引对数据库系统的负面影响是什么？" class="headerlink" title="索引对数据库系统的负面影响是什么？"></a>索引对数据库系统的负面影响是什么？</h2><blockquote>
+<p>创建索引和维护索引需要耗费时间，这个时间随着数据量的增加而增加。<br>索引需要占用物理空间，不光是表需要占用数据空间，每个索引也需要占用物理空间。<br>当对表进行增、删、改、的时候索引也要动态维护，这样就降低了数据的维护速度。</p>
+</blockquote>
+<h2 id="可以使用多少列创建索引？"><a href="#可以使用多少列创建索引？" class="headerlink" title="可以使用多少列创建索引？"></a>可以使用多少列创建索引？</h2><blockquote>
+<p>任何标准表最多可以创建 16 个索引列。</p>
+</blockquote>
+<p>说说对 SQL 语句优化有哪些方法？<br>Where子句中：where表之间的连接必须写在其他 Where 条件之前，那些可以过滤掉最大数量记录的条件必须写在Where子句的末尾和HAVING 最后。<br>用EXISTS替代IN，用NOT EXISTS替 NOT IN。<br>避免在索引列上使用计算、IS NULL和IS NOT NULL<br>对查询进行优化，应尽量避免全表扫描，首先应考虑在 where 及 order by 涉及的列上建立索引。<br>应尽量避免在 where 子句中对字段进行 null 值判断，否则将导致引擎放弃使用索引而进行全表扫描<br>应尽量避免在 where 子句中对字段进行表达式操作，这将导致引擎放弃使用索引而进行全表扫描</p>
+<h1 id="redis"><a href="#redis" class="headerlink" title="redis"></a>redis</h1><p>有五种数据类型</p>
+<p>string list set hash zset</p>
+<h2 id="为什么说redis快"><a href="#为什么说redis快" class="headerlink" title="为什么说redis快"></a>为什么说redis快</h2><p>i. 绝大部分请求是纯粹的内存操作（非常快速）</p>
+<p>ii. 采用单线程,避免了不必要的上下文切换和竞争条件</p>
+<p>iii. 非阻塞IO - IO多路复用</p>
+<p>2.是键值数据库，本身具有简单快捷的特点</p>
+<h2 id="Redis-的持久化机制"><a href="#Redis-的持久化机制" class="headerlink" title="Redis 的持久化机制"></a>Redis 的持久化机制</h2><h3 id="RDB持久化"><a href="#RDB持久化" class="headerlink" title="RDB持久化"></a>RDB持久化</h3><p>定义:</p>
+<p>RDB 快照方式持久化 默认的持久化方式  手动触发或自动触发</p>
+<p>优点:</p>
+<p>1.只有一份rdb文件，可随时备份</p>
+<p>2.比AOF文件小，加载效率高,网络传输快，适合全量复制,恢复速度比AOF快,最重要的优点是对性能的影响相对较小</p>
+<p>3.只提供fork子进程，不阻塞主进程，IO操作比较少</p>
+<p>缺点：</p>
+<p>RDB文件的致命缺点在于其数据快照的持久化方式决定了必然做不到实时持久化，而在数据越来越重要的今天，数据的大量丢失很多时候是无法接受的，因此AOF持久化成为主流。此外，RDB文件需要满足特定格式，兼容性差（如老版本的Redis不兼容新版本的RDB文件）。</p>
+<h3 id="AOF持久化"><a href="#AOF持久化" class="headerlink" title="AOF持久化"></a><strong>AOF持久化</strong></h3><p>定义:</p>
+<p>已日志的形式记录数据库的每一次写操作,在redis重新启动后回读取该文件来重新恢复数据</p>
+<p>优点:</p>
+<ol>
+<li>与RDB持久化相对应，AOF的优点在于支持秒级持久化、兼容性好</li>
+<li>安全性高</li>
+<li>以append的形式追加到AOF文件中 不会对旧日志文件有影响</li>
+</ol>
+<p>缺点是</p>
+<p>文件大、恢复速度慢、对性能影响大。</p>
+<p>AOF  持久化所有变更数据库状态的操作指令,以append的形式追加到AOF文件中,在服务器重新启动的时候执行这些命令还原到关闭服务器之前的状态</p>
+<p>混合持久化</p>
+<p>redis4.0之后可以混合持久化</p>
+<p>首先由RDB定期完成内存快照的备份,再用AOF完成两次RDB之间的操作指令记录,由这两部分共同完成持久化.</p>
+<p>优点是 充分利用了RDB的加载快,备份文件小,以及AOF的尽可能不丢数据的特性</p>
+<p>缺点是兼容性差 redis4.0之前无法识别备份文件, 前半部分是rgd 阅读性差</p>
+<h2 id="Redis-持久化方案的建议"><a href="#Redis-持久化方案的建议" class="headerlink" title="Redis 持久化方案的建议"></a>Redis 持久化方案的建议</h2><p>如果Redis只是用来做缓存服务器，比如数据库查询数据后缓存，那可以不用考虑持久化，因为缓存服务失效还能再从数据库获取恢复。</p>
+<p>如果你要想提供很高的数据保障性，那么建议你同时使用两种持久化方式。如果你可以接受灾难带来的几分钟的数据丢失，那么可以仅使用RDB。</p>
+<p>通常的设计思路是利用主从复制机制来弥补持久化时性能上的影响。即Master上RDB、AOF都不做，保证Master的读写性能，而Slave上则同时开启RDB和AOF（或4.0以上版本的混合持久化方式）来进行持久化，保证数据的安全性。</p>
+<h2 id="缓存穿透、缓存击穿、缓存雪崩解决方案"><a href="#缓存穿透、缓存击穿、缓存雪崩解决方案" class="headerlink" title="缓存穿透、缓存击穿、缓存雪崩解决方案"></a>缓存穿透、缓存击穿、缓存雪崩解决方案</h2><h3 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h3><p>指查询一个一定不存在的数据，如果从存储层查不到数据则不写入缓存，这将导致这个不存在的数据每次请求都要到 DB 去查询，可能导致 DB 挂掉。</p>
+<p>解决方案：</p>
+<p>i. 查询返回的数据为空，仍把这个空结果进行缓存，但过期时间会比较短</p>
+<p>ii. 布隆过滤器：将所有可能存在的数据哈希到一个足够大的 bitmap 中，一个一定不存在的数据会被这个 bitmap 拦截掉，从而避免了对 </p>
+<p>DB的查询</p>
+<h3 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h3><p>定义:</p>
+<p>对于设置了过期时间的 key，缓存在某个时间点过期的时候，恰好这时间点对这个 Key 有大量的并发请求过来，这些请求发现缓存过期一般都会从后端 DB 加载数据并回设到缓存，这个时候大并发的请求可能会瞬间把 DB 压垮。</p>
+<p>解决方案：</p>
+<ol>
+<li><p>使用互斥锁：当缓存失效时，不立即去 load db，先使用如 Redis 的 setnx 去设置一个互斥锁，当操作成功返回时再进行 load db 的操作并回设缓存，否则重试 get 缓存的方法。</p>
+</li>
+<li><p>永远不过期：物理不过期，但逻辑过期（后台异步线程去刷新）。</p>
+</li>
+</ol>
+<h3 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h3><p>定义:</p>
+<p>设置缓存时采用了相同的过期时间，导致缓存在某一时刻同时失效，请求全部转发到 DB， DB 瞬时压力过重雪崩。与缓存击穿的区别：雪崩是很多 key，击穿是某一个key 缓存。</p>
+<p>解决方案：</p>
+<ol>
+<li><p>缓存失效后，通过加锁或者队列来控制读数据库写缓存的线程数量。比如对某个key只允许一个线程查询数据和写缓存，其他线程等待。</p>
+</li>
+<li><p>将缓存失效时间分散开，比如可以在原有的失效时间基础上增加一个随机值，比如 1-5 分钟随机，这样每一个缓存的过期时间的重复率就会降低，就很难引发集体失效的事件。</p>
+</li>
+<li><p>做二级缓存，A1为原始缓存，A2为拷贝缓存，A1失效时，可以访问A2，A1缓存失效时间设置为短期，A2设置为长期</p>
+</li>
+</ol>
+<h2 id="内存淘汰机制"><a href="#内存淘汰机制" class="headerlink" title="内存淘汰机制"></a>内存淘汰机制</h2><ul>
+<li>allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的 key（这个是最常用的）。</li>
+</ul>
+<h2 id="Redis-的集群模式"><a href="#Redis-的集群模式" class="headerlink" title="Redis 的集群模式"></a>Redis 的集群模式</h2><h2 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h2><p>定义:</p>
+<p>默认情况下每台redis服务器都是主节点,只需要配置从机就可以了</p>
+<p>一主二从</p>
+<p>slaveof + 主机名字 + 端口 认老大</p>
+<h2 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h2><p>定义:</p>
+<p>redis从2.8开始提供了哨兵模式,后台监控主机是否故障,如果故障了自动开启投票根据投票数转换从机为主机</p>
+<p>原理:</p>
+<p>![image-20211230002554874](/Users/beichen/Library/Application Support/typora-user-images/image-20211230002554874.png)</p>
+<p>配置一个独立的哨兵进程, 哨兵会发送命令给每台redis服务器发送命令并等待响应,从而监控多个redis实例的状态.</p>
+<p>假如发送命令不回了,当然就判断这台机器挂掉了</p>
+<p>![image-20211230002840075](/Users/beichen/Library/Application Support/typora-user-images/image-20211230002840075.png)</p>
+<p>当然哨兵进程也有可能挂掉,所有一般是开启6个服务起步,三个哨兵,三个redis实例.</p>
+<p>哨兵之间也会互相共享状态</p>
+<p>当主服务器宕机,某一个哨兵监控到了这个状态,并不会立马进行failover故障转移操作,只有一个哨兵主观认为主服务器下线,这种状态就是<em><strong>主观下线</strong></em>,当一定量的哨兵都判断主服务挂掉了之后,哨兵之间就会发起一次投票,进行<strong>故障转移</strong>操作,就会发布<strong>订阅模式</strong>,选出一个新的slave来当主机<strong>客观下线</strong>.</p>
+<h2 id="redis分布式锁"><a href="#redis分布式锁" class="headerlink" title="redis分布式锁"></a>redis分布式锁</h2><p>基于setnx来实现</p>
+<p>![image-20211231165135803](/Users/beichen/Library/Application Support/typora-user-images/image-20211231165135803.png)</p>
+<p>定义:</p>
+<p>set if not exists  来创建</p>
+<p> 当执行setnx 返回值为1的时候则表示创建锁成功 否则就是失败 </p>
+<p>释放锁 del 删除锁即可</p>
+<p>其他线程setnx 操作失败的时候则代表获取锁失败 </p>
+<p>缺点: </p>
+<p>无超时时间设置 如果出问题 则可能会造成死锁</p>
+<p>![image-20211231165536379](/Users/beichen/Library/Application Support/typora-user-images/image-20211231165536379.png)</p>
+<p>最好在创建锁的时候给value携带一个唯一表示,列入传递一个uuid,  在删除的时候判断uuid是否属于当前的线程,如果匹配才删除,来避免锁被误删掉的问题.</p>
+<p>![image-20211231170008755](/Users/beichen/Library/Application Support/typora-user-images/image-20211231170008755.png)</p>
+<p>注意判断uuid是否匹配的操作和删除的操作需要合并成原子操作,可以使用lua脚本来进行执行,是原子性的</p>
+<p>![image-20211231170148147](/Users/beichen/Library/Application Support/typora-user-images/image-20211231170148147.png)</p>
+<h1 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h1><h2 id="双亲委派机制"><a href="#双亲委派机制" class="headerlink" title="双亲委派机制"></a>双亲委派机制</h2><p>java是在虚拟机中运行的</p>
+<p> 由ClassLoader类加载器将 java源代码被编译成class文件  加载到jvm中运行的</p>
+<p> JVM中提供了三层的ClassLoader</p>
+<p>Bootstrap classLoader:主要负责加载核心的类库(java.lang.*等)，构造ExtClassLoader和APPClassLoader。</p>
+<p>ExtClassLoader：主要负责加载jre/lib/ext目录下的一些扩展的jar。</p>
+<p>AppClassLoader：主要负责加载应用程序的主函数类</p>
+<p>当一个calss文件开始加载时,不会考虑自定义类加载器,而是先检查appClassLoader是否加载过,有则加载过不在加载,没有则拿父加载器ExtClassLoader判断是否加载过,如果没有,在判断Bootstrap classLoader能否加载,无法加载则会下沉初步判断子加载器能否加载,<strong>最后还是不行则会抛出ClassNotFoundException</strong></p>
+<p>这种设计有个好处是，如果有人想替换系统级别的类：String.java。篡改它的实现，在这种机制下这些系统的类已经被Bootstrap classLoader加载过了，所以其他类加载器并没有机会再去加载，从一定程度上防止了危险代码的植入。</p>
+<h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2><h3 id="native"><a href="#native" class="headerlink" title="native"></a>native</h3><p>带了native关键字的,说明java的作用范围达不到了 会调用底层C语言库</p>
+<p>会进入本地方法栈</p>
+<p>调用本地方法本地接口</p>
+<p>jni 为了扩展java的使用 融合不同的语言 最初c,c++</p>
+<p>在内存区域中专门开辟了一片区域  本地方法栈 native method stack 登记native方法</p>
+<p>在最终执行的时候 加载本地方法库中的方法通过jni调用</p>
+<p>![image-20211230000426980](/Users/beichen/Library/Application Support/typora-user-images/image-20211230000426980.png)</p>
+<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><p>每个线程都有一个程序计数器,是线程私有的,就是一个指针,指向方法区中的方法字节码</p>
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>定义:</p>
+<p>先进先出</p>
+<p>喝多了吐就是栈 吃多了拉就是队列</p>
+<p>主管程序的运行,生命周期和线程同步,线程结束,栈也就释放了, 其中<strong>不存在垃圾回收</strong></p>
+<p>栈中存放:</p>
+<p>8大基本类型 + 对象引用+ 实例的方法</p>
+<p>![image-20211230101604606](/Users/beichen/Library/Application Support/typora-user-images/image-20211230101604606.png)</p>
+<p>程序正在运行的方法一定在栈的顶部</p>
+<p>栈满了抛出stackOverFlowError</p>
+<p>![image-20211230102135957](/Users/beichen/Library/Application Support/typora-user-images/image-20211230102135957.png)</p>
+<h3 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h3><p>所有线程共享, 所有字段和方法字节码,以及一些特殊方法,构造函数,接口代码也在此定义.</p>
+<p>简单说 所有定义的方法的信息都存在该区域  所有线程共享</p>
+<p>常量池在其内</p>
+<h3 id="堆-heap"><a href="#堆-heap" class="headerlink" title="堆(heap)"></a>堆(heap)</h3><p>定义:</p>
+<p>类加载器读取了类文件之后,会把类,方法,变量,常量放在堆中,真正放对象实例的还是在堆中</p>
+<p>堆中分三个区域</p>
+<p>![image-20211230103640401](/Users/beichen/Library/Application Support/typora-user-images/image-20211230103640401.png)</p>
+<p>GC垃圾回收 主要是伊甸园区和养老区</p>
+<p>假设内存满了 就会抛一个oom异常  堆满了</p>
+<p>JDK8以后  永久区改名称元空间</p>
+<h4 id="新生区"><a href="#新生区" class="headerlink" title="新生区"></a>新生区</h4><p>类:</p>
+<p>诞生,成长的地方 甚至死亡</p>
+<p>伊甸园区 所有的对象都是在伊甸园区出生的</p>
+<p>伊甸园区满了就会触发一次轻GC 活下来的会存入 幸存者区</p>
+<h4 id="幸存者区"><a href="#幸存者区" class="headerlink" title="幸存者区"></a>幸存者区</h4><p>伊甸园区和幸存者区都满了之后 会堆整个新生区进行一次重GC 最终活下来的会进入养老区</p>
+<p>全部满了就会触发OOM</p>
+<h4 id="养老区"><a href="#养老区" class="headerlink" title="养老区"></a>养老区</h4><p>伊甸园区和幸存者区都满了之后 会堆整个新生区进行一次重GC 最终活下来的会进入养老区</p>
+<p>全部满了就会触发OOM</p>
+<h4 id="永久区"><a href="#永久区" class="headerlink" title="永久区"></a>永久区</h4><p>![image-20211230104836418](/Users/beichen/Library/Application Support/typora-user-images/image-20211230104836418.png)</p>
+<p>关闭虚拟机就会释放此区域</p>
+<p>![image-20211230105402413](/Users/beichen/Library/Application Support/typora-user-images/image-20211230105402413.png)</p>
+<p>逻辑上存在</p>
+<p>物理上元空间不存在</p>
+<p>![image-20211230105605574](/Users/beichen/Library/Application Support/typora-user-images/image-20211230105605574.png)</p>
+<h3 id="GC"><a href="#GC" class="headerlink" title="GC"></a>GC</h3><p>gc算法:</p>
+<p>标记清除法</p>
+<p>标记压缩</p>
+<p>复制算法</p>
+<h4 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h4><p>定义:</p>
+<p>给每个对象分配一个计数器,在计算对象使用的次数,干掉次数少的对象. </p>
+<p>缺点:计数器本身就消耗资源</p>
+<p>循环调用就根本无法清除了</p>
+<h4 id="标记清除压缩算法"><a href="#标记清除压缩算法" class="headerlink" title="标记清除压缩算法"></a>标记清除压缩算法</h4><p>定义</p>
+<ol>
+<li><p>扫描所有对象,对使用过的对象进行标记</p>
+</li>
+<li><p>对没有标记的对象进行清除</p>
+</li>
+<li><p>再一次扫描,向一端移动存活对象,干掉内存碎片</p>
+</li>
+</ol>
+<p>优点:</p>
+<p> 不需要复制算法一样空一片幸存者区</p>
+<p>缺点: </p>
+<ol>
+<li>两次扫描浪费时间成本</li>
+<li>产生内存碎片</li>
+<li>移动存活对象也是成本</li>
+</ol>
+<h4 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h4><p>将GC roots对象,线程栈的本地变量,静态变量,本地方法栈中的变量等等当做起点,从这些节点开始向下搜索引用的对象,找到的对象就会非垃圾对象,其余为标记的就都认为是垃圾对象</p>
+<h4 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h4><p>![image-20211230110633486](/Users/beichen/Library/Application Support/typora-user-images/image-20211230110633486.png)</p>
+<ol>
+<li>每次轻GC都会把存活下来的存到幸存者区</li>
+<li>如果两个幸存者区都有存活的对象</li>
+<li>会永远把一个幸存者区置空 置空的就是to区</li>
+<li>存活的在from区</li>
+</ol>
+<p>循环15次之后存活的放入老年代</p>
+<p>新生区主要用的复制算法</p>
+<p>优点:没有内存碎片</p>
+<p>缺点:永远浪费了一半的from区</p>
+<h1 id="elasticsearch"><a href="#elasticsearch" class="headerlink" title="elasticsearch"></a><strong>elasticsearch</strong></h1><h1 id="MQ"><a href="#MQ" class="headerlink" title="MQ"></a>MQ</h1><h2 id="mq的作用"><a href="#mq的作用" class="headerlink" title="mq的作用"></a>mq的作用</h2><p>解耦合</p>
+<p>削峰填谷</p>
+<p>异步</p>
+<h2 id="RabbitMQ的工作模式"><a href="#RabbitMQ的工作模式" class="headerlink" title="RabbitMQ的工作模式"></a>RabbitMQ的工作模式</h2><p>![image-20211230195835759](/Users/beichen/Library/Application Support/typora-user-images/image-20211230195835759.png)</p>
+<p>![image-20211230195911339](/Users/beichen/Library/Application Support/typora-user-images/image-20211230195911339.png)</p>
+<p>![image-20211230195935735](/Users/beichen/Library/Application Support/typora-user-images/image-20211230195935735.png)</p>
+<p>![image-20211230200023785](/Users/beichen/Library/Application Support/typora-user-images/image-20211230200023785.png)</p>
+<p>![image-20211230200040560](/Users/beichen/Library/Application Support/typora-user-images/image-20211230200040560.png)</p>
+<h2 id="如何保证RabbitMQ消息的顺序性？"><a href="#如何保证RabbitMQ消息的顺序性？" class="headerlink" title="如何保证RabbitMQ消息的顺序性？"></a>如何保证RabbitMQ消息的顺序性？</h2><p>拆分多个 queue，每个 queue 一个 consumer， 这样消费者一定是按顺序消费的</p>
+<h2 id="消息防止重复消费"><a href="#消息防止重复消费" class="headerlink" title="消息防止重复消费"></a>消息防止重复消费</h2><p>如果是广播或者topic模式,一个队列多个consumer,可能就会有重复消费的问题.</p>
+<p>可以在消费消息的时候存一条唯一的记录到数据库或者redis中,在每次消费消息之前先在数据库或者redis中确认一次是否已经存在.</p>
+<p>![image-20211230231359160](/Users/beichen/Library/Application Support/typora-user-images/image-20211230231359160.png)</p>
+<h2 id="保证消息不丢失"><a href="#保证消息不丢失" class="headerlink" title="保证消息不丢失"></a>保证消息不丢失</h2><p>丢失三种情况和三种解决方案</p>
+<p>Q1. 生产者丢失数据</p>
+<p>解决方案:</p>
+<ol>
+<li>可以开启rabbitMQ的事务功能</li>
+</ol>
+<p>缺点: 事务机制是同步的,吞吐量太低,严重消耗性能</p>
+<ol start="2">
+<li>开启confirm模式</li>
+</ol>
+<p>生产者开启confirm模式之后,每次推送的消息都会分配一个唯一的id</p>
+<p>如果成功写入到了rabbitMQ中,rabbitMQ会给你回传一个ack消息,告诉你消息ok了.</p>
+<p>如果写入失败,会回调你的一个nack接口,告诉你消息接收失败,你可以基于这个机制进行扩展,比如一段时间没有收到消息回调,就进行重新发送.</p>
+<p>Q2. rabbitmq弄丢数据</p>
+<p>想要防止rabbitmq弄丢数据,你必须开启mq的持久化,在消息写入之后写入到磁盘中.</p>
+<p>需要做两步</p>
+<ol>
+<li>将队列开启持久化</li>
+<li>发送消息的时候将消息的deliveryMode设置为2,开启消息持久化,mq收到消息就会写入到磁盘中</li>
+</ol>
+<p>必须要同时设置两个持久化才行,哪怕mq挂掉了,这样也能保证mq在重新启动后读取磁盘里的queue和消息</p>
+<p>还有一种可能mq还没来得及开启持久化,消息正好进来的时候挂掉了,可能会导致消息丢失,不过这个概率非常小</p>
+<p>所以一般和confirm机制配合起来使用,这种情况挂掉了没收到消息,你也可以重新发送.</p>
+<p>Q3.消费端弄丢了数据</p>
+<p>比如刚接收到消息,开始消费的时候消费端挂掉了.但是mq认为你成功消费了</p>
+<p>可以使用mq的ack机制,可以关闭mq的自动ack,可以调用api来操作.</p>
+<p>在保证消息正确消费了之后手动ack.</p>
+<p>这样的话假如没有成功消费消息,mq则会没收到ack命令把消息分发给其他消费者处理,消息并不会丢失.</p>
+<h1 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h1><p> <strong>RPC 和 HTTP</strong> </p>
+<p>两者没有可比性,因为不是一个层级的东西.</p>
+<p>dubbo和spring cloud的区别？</p>
+<p>最大的区别：Dubbo底层是使用Netty这样的NIO框架，是基于TCP协议传输的，配合以Hession序列化完成RPC通信。而SpringCloud是基于Http协议+Rest接口调用远程过程的通信，相对来说，Http请求会有更大的报文，占的带宽也会更多。但是REST相比RPC更为灵活，服务提供方和调用方的依赖只依靠一纸契约，不存在代码级别的强依赖，这在强调快速演化的微服务环境下，显得更为合适，至于注重通信速度还是方便灵活性，具体情况具体考虑。</p>
+<h2 id="dubbo"><a href="#dubbo" class="headerlink" title="dubbo"></a>dubbo</h2><p>定义:</p>
+<p>Dubbo是阿里巴巴开源的RPC框架</p>
+<p>![image-20220101140943402](/Users/beichen/Library/Application Support/typora-user-images/image-20220101140943402.png)</p>
+<p>Registry(rui jue si quan)</p>
+<p>Container(ken tei ne)服务运行的容器</p>
+<p>Monitor(mo le te) 监控中心</p>
+<p>工作步骤:</p>
+<ol>
+<li><p>首先服务提供者 Provider 启动然后向注册中心注册自己所能提供的服务。</p>
+</li>
+<li><p>服务消费者 Consumer 启动向注册中心订阅自己所需的服务。</p>
+</li>
+<li><p>然后注册中心将提供者元信息通知给 Consumer， 之后 Consumer 因为已经从注册中心获取提供者的地址，因此可以通过负载均衡选择一个 Provider 直接调用 。</p>
+</li>
+<li><p>之后服务提供方元数据变更的话注册中心会把变更推送给服务消费者。</p>
+</li>
+<li><p>服务提供者和消费者都会在内存中记录着调用的次数和时间，然后定时的发送统计数据到监控中心。</p>
+</li>
+</ol>
+<p>到这基本上就差不多了，如果之前看过丙的 Dubbo 系列文章的话，那就算看过源码了，肯定对一系列过程很清晰了，所以在适当的时机可以说自己看过 Dubbo 源码。</p>
+<p>1第一步，provider向注册中心去注册<br>2第二步，consumer从注册中心订阅服务，注册中心会通知consumer注册好的服务<br>3第三步，consumer调用provider<br>4第四步，consumer和provider都异步的通知监控中心</p>
+<p>挂了也可以跑</p>
+<p>可以，因为刚开始初始化的时候，消费者会从注册中心将提供者的地址等信息拉取到本地缓存，所以注册中心挂了可以继续通信。</p>
+<p>Dubbo底层是基于socket</p>
+<h3 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h3><p>支持http,dubbo,默认就是dubbo协议</p>
+<h3 id="注册中心"><a href="#注册中心" class="headerlink" title="注册中心"></a>注册中心</h3><p>Zookeeper注册中心： 基于分布式协调系统Zookeeper实现，采用Zookeeper的watch机制实现数据变更；<br>redis注册中心： 基于redis实现，采用key/Map存储，住key存储服务名和类型，Map中key存储服务URL，value服务过期时间。基于redis的发布/订阅模式通知数据变更；<br>Simple注册中心</p>
+<h3 id="Dubbo的心跳机制"><a href="#Dubbo的心跳机制" class="headerlink" title="Dubbo的心跳机制"></a>Dubbo的心跳机制</h3><p> 目的：<br> 维持provider和consumer之间的长连接<br> 实现：<br> dubbo心跳时间heartbeat默认是1s，超过heartbeat时间没有收到消息，就发送心跳消  息(provider，consumer一样),如果连着3次(heartbeatTimeout为heartbeat*3)没有收到心跳响应，provider会关闭channel，而consumer会进行重连;不论是provider还是consumer的心跳检测都是通过启动定时任务的方式实现；</p>
+<p>Dubbo的zookeeper做注册中心，如果注册中心全部挂掉，发布者和订阅者还能通信吗？<br> 可以通信的，启动dubbo时，消费者会从zk拉取注册的生产者的地址接口等数据，缓存在本地。每次调用时，按照本地存储的地址进行调用；<br> 注册中心对等集群，任意一台宕机后，将会切换到另一台；注册中心全部宕机后，服务的提供者和消费者仍能通过本地缓存通讯。服务提供者无状态，任一台 宕机后，不影响使用；服务提供者全部宕机，服务消费者会无法使用，并无限次重连等待服务者恢复；<br> 挂掉是不要紧的，但前提是你没有增加新的服务，如果你要调用新的服务，则是不能办到的</p>
+<h3 id="Dubbo使用的是什么通信框架"><a href="#Dubbo使用的是什么通信框架" class="headerlink" title="Dubbo使用的是什么通信框架?"></a>Dubbo使用的是什么通信框架?</h3><p>默认使用NIO Netty框架</p>
+<h3 id="Dubbo和Spring-Cloud的关系？"><a href="#Dubbo和Spring-Cloud的关系？" class="headerlink" title="Dubbo和Spring Cloud的关系？"></a>Dubbo和Spring Cloud的关系？</h3><p>Dubbo是 SOA 时代的产物，它的关注点主要在于服务的调用，流量分发、流量监控和熔断。而 Spring Cloud诞生于微服务架构时代，考虑的是微服务治理的方方面面，另外由于依托了 Spirng、Spirng Boot的优势之上，两个框架在开始目标就不一致，Dubbo 定位服务治理、Spirng Cloud 是一个生态。</p>
+<h3 id="dubbo和spring-cloud的区别？"><a href="#dubbo和spring-cloud的区别？" class="headerlink" title="dubbo和spring cloud的区别？"></a>dubbo和spring cloud的区别？</h3><p>最大的区别：Dubbo底层是使用Netty这样的NIO框架，是基于TCP协议传输的，配合以Hession序列化完成RPC通信。而SpringCloud是基于Http协议+Rest接口调用远程过程的通信，相对来说，Http请求会有更大的报文，占的带宽也会更多。但是REST相比RPC更为灵活，服务提供方和调用方的依赖只依靠一纸契约，不存在代码级别的强依赖，这在强调快速演化的微服务环境下，显得更为合适，至于注重通信速度还是方便灵活性，具体情况具体考虑。</p>
+<h2 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h2><p>http协议传输</p>
+<h3 id="注册中心-1"><a href="#注册中心-1" class="headerlink" title="注册中心"></a>注册中心</h3><p>springcloud的注册中心用eureka或者Consul</p>
+<h3 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h3><ul>
+<li><p>Eureka的原理</p>
+<ul>
+<li><p>\1. 首先它有两个角色：服务端和客户端，服务端就是一个注册中心。而客户端就是那些消费者和提供者都是微服务</p>
+</li>
+<li><p>\2. 首先客户端会将自己的服务名+ip+port等信息注册到注册中心去</p>
+</li>
+<li><p>\3. 而消费端会每隔30秒去注册中心拉取这些服务列表，然后存到本地缓存中</p>
+</li>
+<li><p>\4. 从本地缓存中取出，进行一个动态的调用</p>
+</li>
+<li><p>期间客户端会每隔30s向注册中心发个消息，表示自己还存在，这就是心跳检测</p>
+</li>
+<li><p>注册中心会每隔60s就检测一次，客户端有没有发这个心跳过来，如果没有，那么倒计时90s，一旦超时就将这个服务挂掉（前提是关闭了自自我保护机制，默认是开启的）这就是失效剔除机制</p>
+</li>
+<li><p>自我保护机制开启的时候，当客户端十五分钟之内，发现这个续约失败率低于百分之85的话是不会被剔除的</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Dubbo和SpringCloud的区别"><a href="#Dubbo和SpringCloud的区别" class="headerlink" title="Dubbo和SpringCloud的区别"></a>Dubbo和SpringCloud的区别</h2><ol>
+<li><p>Dubbo 只是实现了服务治理，而 Spring Cloud 子项目分别覆盖了微服务架构下的众多部件，服务治理只是其中的一个方面。</p>
+</li>
+<li><p>协议:</p>
+<p>Dubbo 使用 RPC 通讯协议</p>
+<p>SpringCloud使用 HTTP 协议的 REST API</p>
+</li>
+<li><p>网关:</p>
+<p>Dubbo 需要自己开发一套 API 网关</p>
+<p>而 Spring Cloud 则可以通过 Zuul 配置即可完成网关定制。使用方式上 Spring Cloud 略胜一筹</p>
+</li>
+<li><p>维护难度:</p>
+<p>Dubbo需要手动维护jar包依赖</p>
+<p>SpingCloud维护简单只需要通过maven继承spring-cloud-parent版本即可</p>
+</li>
+<li><p>功能:</p>
+<p>Dubbo定位是RPC 和服务治理。配置中心、分布式跟踪等都需要自己去集成;</p>
+<p>spring cloud SpringCloud定位是微服务架构。提供了<strong>微服务整套方案</strong>：服务发现注册、配置中心、、负载均衡、断路器、数据监控等</p>
+</li>
+<li><p>性能:</p>
+<p>dubbo稍强:基于TCP长链接和Netty实现的NIO异步传输</p>
+<p>SpringCloud稍弱:基于http+ rest接口</p>
+</li>
+<li><p>约束难度</p>
+<p>dubbo容易约束。统一提供方提供的服务接口jar包版本即可。</p>
+<p>springcloud 较难约束</p>
+</li>
+<li><p>定位:</p>
+<p>Dubbo的定位始终是一款<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=RPC">RPC</a>框架</p>
+<p>springcloud是微服务架构的一站式解决方案</p>
+</li>
+</ol>
+<h2 id="ZOOKkepper"><a href="#ZOOKkepper" class="headerlink" title="ZOOKkepper"></a>ZOOKkepper</h2><p>![image-20220101174623582](/Users/beichen/Library/Application Support/typora-user-images/image-20220101174623582.png)</p>
+<p>![image-20220101174639417](/Users/beichen/Library/Application Support/typora-user-images/image-20220101174639417.png) </p>
+<p>![image-20220101175006617](/Users/beichen/Library/Application Support/typora-user-images/image-20220101175006617.png)</p>
+<ol>
+<li><p>首先A客户端创建一个临时有序节点,判断自己创建的节点是不是最小的</p>
+<p>如果是,则获取到锁 -&gt; 执行任务 -&gt; 完毕释放锁</p>
+<p>如果不是 监听比自己小的前一个节点</p>
+</li>
+</ol>
+<h1 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h1><p>● seata 控制分布式事务 AT模式</p>
+<p>● 适用于并发不高的，就有个农产品保存模块，其中调用了两个其他微服务模块的保存，这就很适合 seata</p>
+<p>● 实现每一个微服务都会创建一个 undo-log表，回滚日志表</p>
+<p>● 安装一个事务协调器：seata-server</p>
+<p>● 将其整合</p>
+<p>● 导入依赖 版本是 0.7.1</p>
+<p>● 修改它的一些配置：registry.conf ：注册中心需要配置成nacos</p>
+<p>● 然后所有需要使用这个分布式事务的微服务都得配置一下数据源，让seata来代理</p>
+<p>● 每个服务还得导入那两个文件</p>
+<p>● 给分布式大事务就是起初调用的那个，加一个@GloablTransactional</p>
+<p>● 小事务还是@Transactional</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">chenXi</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://example.com/2018/09/07/%E5%B0%8F%E7%BB%93/">http://example.com/2018/09/07/%E5%B0%8F%E7%BB%93/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">chenXi</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Typora/">
+                                    <span class="chip bg-color">Typora</span>
+                                </a>
+                            
+                                <a href="/tags/Markdown/">
+                                    <span class="chip bg-color">Markdown</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2022/01/02/hello-world/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        
+                        <span class="card-title">Hello World</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-02
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            陈曦
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
+            </div>
+            <div class="card">
+                <a href="/2018/09/07/%E5%B0%8F%E7%BB%93/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="小结">
+                        
+                        <span class="card-title">小结</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2018-09-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            chenXi
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Typora/">
+                        <span class="chip bg-color">Typora</span>
+                    </a>
+                    
+                    <a href="/tags/Markdown/">
+                        <span class="chip bg-color">Markdown</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2022</span>
+            
+            <a href="/about" target="_blank">陈曦</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/blinkfox" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1181062873@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
